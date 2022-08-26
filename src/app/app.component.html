@@ -1,0 +1,49 @@
+<div class="toolbar" role="banner">
+  <img src="assets/logo_white.png" />
+</div>
+
+<div class="content" role="main">
+  <h2>Products</h2>
+  <div class="container">
+    <div class="filter">
+      <label for="search">Search</label>
+      <input id="search" />
+    </div>
+    <div class="filter">
+      <label for="brands">Brands</label>
+      <select id="brands"> </select>
+    </div>
+    <div class="filter">
+      <label for="in-stock">All</label>
+      <input type="radio" id="in-stock" name="stock" value="all" checked>
+      <label for="in-stock">In stock</label>
+      <input type="radio" id="in-stock" name="stock" value="in-stock">
+      <label for="out-of-stock">Out of stock</label>
+      <input type="radio" id="out-of-stock" name="stock" value="out-of-stock">
+    </div>
+  </div>
+  <div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Brand</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody id="products-body">
+        <tr *ngFor="let product of products | async">
+          <td>{{product.id}}</td>
+          <td>{{product.name}}</td>
+          <td>{{product.brand}}</td>
+          <td>{{product.price}}</td>
+          <td>{{product.quantity}}</td>
+          <td>{{product.description}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
