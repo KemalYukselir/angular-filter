@@ -7,19 +7,22 @@
   <div class="container">
     <div class="filter">
       <label for="search">Search</label>
-      <input id="search" />
+      <input [(ngModel)] = "searchInput" (ngModelChange) = "onSearchProduct()" id="search" />
     </div>
     <div class="filter">
       <label for="brands">Brands</label>
-      <select id="brands"> </select>
+      <select id="brands" #brandSelect (change)="onBrandsSelection(brandSelect.value)">
+        <option value="">All</option>
+        <option *ngFor="let brand of uniqueBrands$ | async" [value]="brand">{{ brand }}</option>
+      </select>
     </div>
     <div class="filter">
       <label for="in-stock">All</label>
-      <input type="radio" id="in-stock" name="stock" value="all" checked>
+      <input type="radio" id="in-stock" name="stock" value="all" checked (change) = "onStockSelection('all')">
       <label for="in-stock">In stock</label>
-      <input type="radio" id="in-stock" name="stock" value="in-stock">
+      <input type="radio" id="in-stock" name="stock" value="in-stock" (change) = "onStockSelection('in-stock')">
       <label for="out-of-stock">Out of stock</label>
-      <input type="radio" id="out-of-stock" name="stock" value="out-of-stock">
+      <input type="radio" id="out-of-stock" name="stock" value="out-of-stock" (change) = "onStockSelection('out-of-stock')">
     </div>
   </div>
   <div class="container">
@@ -35,7 +38,7 @@
         </tr>
       </thead>
       <tbody id="products-body">
-        <tr *ngFor="let product of products | async">
+        <tr *ngFor="let product of filteredProducts$ | async">
           <td>{{product.id}}</td>
           <td>{{product.name}}</td>
           <td>{{product.brand}}</td>
